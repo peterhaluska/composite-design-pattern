@@ -4,95 +4,60 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>The Composite Pattern - Workshop</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <div class="container">
+            <div class="position-ref full-height">
+                <div class="content">
+                    <div class="title m-b-md">
+                        <small>
+                            The Composite Pattern - Workshop
+                        </small>
+                    </div>
                 </div>
-            @endif
+                <div>
+                    <h3>Application</h3>
+                    <p>
+                        Our application displays one specific Order from our E-shop, listing all the products and the total price of the Order.
+                    </p>
+                    <p>
+                        The application is not connected to any Database, it is using a dummy repository to grab the Order and it's items. The current database for the Orders
+                        is configured in the <strong>AppServiceProvider</strong>.
+                    </p>
+                    <p>
+                        Through our E-shop we can order simple Products or so called Gift Boxes, which can contain any number of products or smaller gift boxes.
+                        <br>
+                        Please keep in mind, our application currently supports <string>int</string> values for Prices.
+                    </p>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                    <h3>
+                        The Task
+                    </h3>
+                    <p>
+                        As currently the application is containing some very bad code, our goal is to refactor it while implementing the Composite Pattern.
+                    </p>
+                    <p>
+                        The main problem is, that we are currently setting the Order's Total Price manually when creating the Order...there is a better way to do it! ;)
+                    </p>
+                    <p>
+                        Once you have identified the place for the Composite pattern and have implemented it, please create a new Product in the AppServiceProvider with a Price
+                        of 12EUR and add it to the existing gift box. You will know you have implemented the Composite, if the Order's total amount will be 50EUR.
+                    </p>
+                    <p>Good luck!</p>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div>
+                    <p class="center">
+                        <a class="btn" href="{{ route('order.show', 123) }}">
+                            Go to the Order
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
