@@ -32,7 +32,8 @@
                         is configured in the <strong>AppServiceProvider</strong>.
                     </p>
                     <p>
-                        Through our E-shop we can order simple Products or so called Gift Boxes, which can contain any number of products or smaller gift boxes.
+                        Through our E-shop we can order simple Products or so called Gift Boxes, which can contain any number of products or smaller gift boxes. Currently, the Gift Box
+                        has a fixed price, but it should be an optional thing.
                         <br>
                         Please keep in mind, our application currently supports <string>int</string> values for Prices.
                     </p>
@@ -44,11 +45,14 @@
                         As currently the application is containing some very bad code, our goal is to refactor it while implementing the Composite Pattern.
                     </p>
                     <p>
-                        The main problem is, that we are currently setting the Order's Total Price manually when creating the Order...there is a better way to do it! ;)
+                        The main problem is, that we are currently setting the Order's Total Price manually when creating the Order, and that our Gift Boxes have always a fixed price...there is a better way to do it! ;)
                     </p>
                     <p>
                         Once you have identified the place for the Composite pattern and have implemented it, please create a new Product in the AppServiceProvider with a Price
-                        of 12EUR and add it to the existing gift box. You will know you have implemented the Composite, if the Order's total amount will be 50EUR.
+                        of 12EUR and add it to the existing gift box and remove it's current fixed price (13EUR), so the Gift Box price will be calculated automatically.
+                    </p>
+                    <p>
+                        You will know you have implemented the Composite, if the Order's total amount will be 50EUR.
                     </p>
                     <p>Good luck!</p>
                 </div>
