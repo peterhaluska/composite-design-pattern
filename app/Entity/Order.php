@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Collection\ProductCollection;
 use DateTime;
 
 class Order implements OrderInterface
@@ -15,7 +16,7 @@ class Order implements OrderInterface
     /** @var DateTime */
     private $createdAt;
 
-    /** @var array */
+    /** @var ProductCollection */
     private $items;
 
     /** @var int */
@@ -25,16 +26,14 @@ class Order implements OrderInterface
      * @param UserInterface $user
      * @param int           $id
      * @param DateTime      $createdAt
-     * @param array         $items
-     * @param int           $price
+     * @param ProductCollection         $items
      */
-    public function __construct(UserInterface $user, int $id, DateTime $createdAt, array $items, int $price)
+    public function __construct(UserInterface $user, int $id, DateTime $createdAt, ProductCollection $items)
     {
         $this->user      = $user;
         $this->id        = $id;
         $this->createdAt = $createdAt;
         $this->items     = $items;
-        $this->price = $price;
     }
 
     /**
@@ -66,7 +65,7 @@ class Order implements OrderInterface
      */
     public function getItems(): array
     {
-        return $this->items;
+        return $this->items->getItems();
     }
 
     /**
@@ -82,6 +81,16 @@ class Order implements OrderInterface
      */
     public function getPrice(): int
     {
-        return $this->price;
+        if ($this->items->count() === 0) {
+            return 0;
+        }
+
+        $total = 0;
+
+        foreach ($this->getItems() as $product) {
+            $total = $total + $product->getPrice();
+        }
+
+        return $total;
     }
 }

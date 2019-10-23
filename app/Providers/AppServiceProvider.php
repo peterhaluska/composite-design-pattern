@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Collection\OrderCollection;
+use App\Collection\ProductCollection;
 use App\Entity\GiftBox;
 use App\Entity\Order;
 use App\Entity\Product;
@@ -30,10 +31,18 @@ class AppServiceProvider extends ServiceProvider
         $product2 = new Product("DesignPatternitis T-shirt", "ts666", 15);
         $product3 = new Product('Supersocks', "s1", 3);
 
-        $box1 = new GiftBox([$product1, $product3], 'Christmas box', 13, "box686");
+        $giftBoxProducts = new ProductCollection();
+        $giftBoxProducts->add($product1);
+        $giftBoxProducts->add($product3);
 
+        $giftBoxProducts->add(new Product('My awesome 12EUR product', '121212', 12));
+
+        $box1 = new GiftBox($giftBoxProducts, 'Christmas box', "box686");
+
+        // Create Order
         $user = new User('John Doe', 'johndoe@thedoe.com');
-        $order1 = new Order($user, 123, new DateTime('2019-10-23 09:52'), [$product1, $product2, $box1], 38);
+        $orderProductsCollection = new ProductCollection([$product1, $product2, $box1]);
+        $order1 = new Order($user, 123, new DateTime('2019-10-23 09:52'), $orderProductsCollection);
 
         $orderCollection = new OrderCollection();
         $orderCollection->add($order1);

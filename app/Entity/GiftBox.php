@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-class GiftBox
+use App\Collection\ProductCollection;
+
+class GiftBox implements ProductInterface
 {
-    /** @var array */
+    /** @var ProductCollection */
     private $items;
 
     /** @var string */
@@ -17,12 +19,12 @@ class GiftBox
     private $price;
 
     /**
-     * @param array  $items
-     * @param string $name
-     * @param int  $price
-     * @param string $code
+     * @param ProductCollection $items
+     * @param string            $name
+     * @param string            $code
+     * @param int|null          $price
      */
-    public function __construct(array $items, string $name, int $price, string $code)
+    public function __construct(ProductCollection $items, string $name, string $code, int $price = null)
     {
         $this->items = $items;
         $this->name  = $name;
@@ -35,7 +37,7 @@ class GiftBox
      */
     public function getItems(): array
     {
-        return $this->items;
+        return $this->items->getItems();
     }
 
     /**
@@ -51,7 +53,17 @@ class GiftBox
      */
     public function getPrice(): int
     {
-        return $this->price;
+        if ($this->price !== null) {
+            return $this->price;
+        }
+
+        $total = 0;
+
+        foreach ($this->getItems() as $product) {
+            $total = $total + $product->getPrice();
+        }
+
+        return $total;
     }
 
     /**
