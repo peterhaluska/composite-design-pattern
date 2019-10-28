@@ -32,7 +32,7 @@
                         is configured in the <strong>AppServiceProvider</strong>.
                     </p>
                     <p>
-                        Through our E-shop we can order simple Products or so called Gift Boxes, which can contain any number of products or smaller gift boxes. Currently, the Gift Box
+                        Through our E-shop we can order simple Products and called Gift Boxes, which can contain any number of products or smaller gift boxes. Currently, the Gift Box
                         has a fixed price, but it should be an optional thing.
                         <br>
                         Please keep in mind, our application currently supports <string>int</string> values for Prices.
@@ -42,7 +42,7 @@
                         The Task
                     </h3>
                     <p>
-                        As currently the application is containing some very bad code, our goal is to refactor it while implementing the Composite Pattern.
+                        As currently the application is containing some bad code, our goal is to refactor it while implementing the Composite Pattern.
                     </p>
                     <p>
                         The main problem is, that we are currently setting the Order's Total Price manually when creating the Order, and that our Gift Boxes have always a fixed price...there is a better way to do it! ;)
